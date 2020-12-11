@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function (){
     // Creiamo array di oggetti per le icone con le seguenti proprieta: 
     // name, prefix, type, family 
     let icons = [];
@@ -23,17 +23,21 @@ $(document).ready(function () {
     //console.log(icons);
 
     // Selezioniamo il container icons
+    // Creiamo una funzione per iterare nell'array e che appenda al container le icone.
+    const tipoPrint = () => {
+        // tip: possiamo usare un ciclo foreach qui e destrutturare le proprieta degli elementi di un array
+        icons.forEach(icon => {
+            // {prefix, type }    
+            
+                $('.icons').append(
+            `<div>
+                <i class= "${icon.prefix} ${icon.type + icon.family}" style="color:blue"></i>
+            <div class="title">${icon.name}</div>`
+                ); 
+            });
+    }
 
-     icons.forEach(icon => {
-    // {prefix, type }    
-        
-        $('.icons').append(
-    `<div>
-        <i class= "${icon.prefix +" "+ icon.type + icon.family}" style="color:blue"></i>
-    <div class="title">${icon.name}</div>`
-        ); 
-    });
-
+    tipoPrint();
     // inseriamo le icone nel container (possiamo creare una funzione tipo 
     // print() 
     // per inserire gli elementi e richiamarla qui) 
