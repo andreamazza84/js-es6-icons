@@ -20,32 +20,25 @@ $(document).ready(function (){
     icons[6] = new icon('hippo', 'fas', 'fa-', 'hippo');
     icons[7] = new icon('fish', 'fas', 'fa-', 'fish');
 
-    //console.log(icons);
+    let container = $('.icons');
 
     // Selezioniamo il container icons
     // Creiamo una funzione per iterare nell'array e che appenda al container le icone.
-    const tipoPrint = () => {
+    const tipoPrint = (objList, htmlElement) => {
         // tip: possiamo usare un ciclo foreach qui e destrutturare le proprieta degli elementi di un array
-        icons.forEach(icon => {
-            // {prefix, type }    
-            
-                $('.icons').append(
-            `<div>
-                <i class= "${icon.prefix} ${icon.type + icon.family}" style="color:blue"></i>
-            <div class="title">${icon.name}</div>`
+        objList.forEach(icon => {
+            // tip: il template literal ci puo aiutare con il markup
+            htmlElement.append(
+                `<div>
+                   <i class= "${icon.prefix} ${icon.type + icon.family}" style="color:blue"></i>
+                <div class="title">${icon.name}</div>`
                 ); 
             });
     }
 
-    tipoPrint();
     // inseriamo le icone nel container (possiamo creare una funzione tipo 
     // print() 
-    // per inserire gli elementi e richiamarla qui) 
-  
-  /* ---- FUNCTIONS ----*/
-  // Creiamo una funzione per iterare nell'array e che appenda al container le icone.
-  // tip: possiamo usare un ciclo foreach qui e destrutturare le proprieta degli elementi di un array
-  // tip: il template literal ci puo aiutare con il markup
-
+    // per inserire gli elementi e richiamarla qui)
+    tipoPrint(icons, container);
 });
 
