@@ -52,34 +52,53 @@ $(document).ready(function () {
         </div>`
         );
       }); 
+
     //estrapoliamo i tipi di icone
-    
-    const filteredIcons = coloredIcons.filter((icon) => {
-        if(icon.family === "animal"){
-            return icon;    
-        }
-        else if(icon.family === "person"){
-            return icon;
-        }
-        else{
-            return icon;
-        }  
-    });
-   
-     //aggiungiamo i tipi alla select
+    const filterByFamily = (objList, value) => {
+        const filteredList = objList.filter((element) => {
+            return element.family === value;
+        });
+        return filteredList;
+    };
+       
+    //aggiungiamo i tipi alla select
     const selection = $('#type');
-    
     selection.append(
-        `<option>animal</option>
-        <option>person</option>
-        <option>object</option>`
+        `<option value="animal">Animal</option>
+        <option value ="person">Person</option>
+        <option value="object">Object</option>`
     );
 
-     //al change mostriamo solo le icone filtrate
-     //mostriamo come passare un parametro a change e contemporaneamente destrutturiamo
-   
-   
-   
-   /* ---- FUNCTIONS ----*/
-   
-   });
+    //al change mostriamo solo le icone filtrate
+    //mostriamo come passare un parametro a change e contemporaneamente destrutturiamo
+    selection.bind('change', function(e){
+        //Al change event pulisco il contenuto della selezione "container".        
+        container.innerHTML = "";
+        //Se il selettore select è su All mostra tutte le icone:
+        if(this.value === ""){
+            coloredIcons.forEach(icon => {
+                const {name, prefix, type, x, color} = icon;
+                container.insertAdjacentHTML('beforeend', 
+                `<div>
+                  <i class="${prefix} ${type+name}" style="color:${color}"></i>
+                  <div class="title">${name}</div>
+                </div>`
+                );
+              }); 
+        }
+        //Se il selettore select è su person, animal o object mostra solo quelle filtrate:
+        else{
+            filterByFamily(coloredIcons, this.value).forEach(icon =>{
+                const {name, prefix, type, x, color} = icon;
+                container.insertAdjacentHTML('beforeend', 
+                `<div>
+                    <i class="${prefix} ${type+name}" style="color:${color}"></i>
+                    <div class="title">${name}</div>
+                </div>`
+            );
+          });
+        }          
+         
+    });
+
+}); //function ready
