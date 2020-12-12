@@ -38,12 +38,12 @@ $(document).ready(function () {
     };   
   
      //aggiungiamo dei colori come da milestone 2
-     ColoredIcons = addColor(icons);
+     coloredIcons = addColor(icons);
     
      //inseriamo le icone nel container come da milestone 2
      const container = document.querySelector('.icons');
-     
-     ColoredIcons.forEach(icon => {
+
+     coloredIcons.forEach(icon => {
         const {name, prefix, type, x, color} = icon;
         container.insertAdjacentHTML('beforeend', 
         `<div>
@@ -52,10 +52,29 @@ $(document).ready(function () {
         </div>`
         );
       }); 
-     //estrapoliamo i tipi di icone
+    //estrapoliamo i tipi di icone
+    
+    const filteredIcons = coloredIcons.filter((icon) => {
+        if(icon.family === "animal"){
+            return icon;    
+        }
+        else if(icon.family === "person"){
+            return icon;
+        }
+        else{
+            return icon;
+        }  
+    });
    
      //aggiungiamo i tipi alla select
-   
+    const selection = $('#type');
+    
+    selection.append(
+        `<option>animal</option>
+        <option>person</option>
+        <option>object</option>`
+    );
+
      //al change mostriamo solo le icone filtrate
      //mostriamo come passare un parametro a change e contemporaneamente destrutturiamo
    
